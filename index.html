@@ -14,7 +14,111 @@
     
     <script type="text/processing">
     
-      /*  INSERT CODE HERE */
+      float btnX;
+float btnY;
+float btnD;
+float reactionTime;
+float strokeWeight;
+float result;
+int cursorType;
+int status;
+PImage L_arrow_cursor;
+PImage R_arrow_cursor;
+PImage E_arrow_cursor;
+PImage check_btn;
+PImage empty_btn;
+
+void setup(){
+  size(1400, 800);
+  noCursor();
+  cursorType = 2;
+  strokeWeight = 4;
+  status = 1;
+  L_arrow_cursor = loadImage("Cursor-04.png");
+  R_arrow_cursor = loadImage("Cursor-06.png");
+  E_arrow_cursor = loadImage("Cursor-05.png");
+  check_btn = loadImage("check_btn");
+  empty_btn = loadImage("empty_btn");
+  frameRate = 30;
+  result = random(0.5 , 2);
+}
+
+void draw(){
+  if(frameCount == 3600){status = 3;}
+  switch(status){
+    case 1:
+      background(0, 0, 0);
+      textSize(128);
+      text("Press ENTER to Start", 40, 120);
+      fill(255,255,255);
+    break;
+    case 2:
+      background(225, 225, 225);
+      if( frameCount%120 == 0 ){  
+        reactionTime = 0;
+        btnX = random(1400-2/btnD);
+        btnY = random(800-2/btnD);
+        btnD = 40;
+        strokeWeight = 4;
+        fill(#FF3333);
+      }
+      
+      noStroke();
+      ellipse( btnX, btnY, btnD, btnD);
+      stroke(255);
+      strokeWeight(strokeWeight);
+      strokeCap(ROUND);
+      line(btnX - btnD/6, btnY - btnD/6, btnX + btnD/6 ,btnY + btnD/6);
+      line(btnX - btnD/6, btnY + btnD/6, btnX + btnD/6 ,btnY - btnD/6);
+      reactionTime++;
+      
+      if(cursorType == 1){
+      image(L_arrow_cursor, mouseX-3, mouseY-7);
+      }
+      if(cursorType == 2){
+      image(E_arrow_cursor, mouseX-8.5, mouseY-9);
+      }
+      if(cursorType == 3){
+      image(R_arrow_cursor, mouseX-20, mouseY-7);
+      }
+    break;
+    case 3:
+      background(0, 0, 0);
+      textSize(128);
+      text("Average time:" + result, 40, 120);
+      fill(255,255,255);
+    break;
+  }
+}
+
+void mouseClicked(){
+    if( mouseX<= btnX+ btnD/2 && mouseY <= btnY + btnD/2 && mouseX >= btnX- btnD/2 && mouseY >= btnY- btnD/2){
+      btnD = 0;
+      strokeWeight = 0;
+      println(reactionTime/60);
+    }
+  }
+  void keyPressed(){
+   if (keyCode == '1'){
+      cursorType = 1;
+    }
+    if (keyCode == '2'){
+      cursorType = 2;
+    }
+    if (keyCode == '3'){
+      cursorType = 3;
+    }
+    if (keyCode == TAB){
+      status = 1;
+    }
+    if (keyCode == ENTER){
+      status = 2;
+    }
+    if (keyCode == BACKSPACE){
+      status = 3;
+      result = random(0.5 , 2);
+    }
+  }
 
     </script>
     <canvas id="sketch" style="border: 1px solid black;"></canvas>
