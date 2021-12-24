@@ -9,8 +9,8 @@
   </head>
   
   <body>
-    <h1>PUT YOUR TITLE HERE</h1>
-    <p>ADD DESCRIPTION HERE</p>
+    <h1>Granada High Tutorial</h1>
+    <p>Processing demo</p>
     
     <script type="text/processing">
     
@@ -69,34 +69,6 @@
           }
     }
 
-void mouseClicked(){
-    if( mouseX<= btnX+ btnD/2 && mouseY <= btnY + btnD/2 && mouseX >= btnX- btnD/2 && mouseY >= btnY- btnD/2){
-      btnD = 0;
-      strokeWeight = 0;
-      println(reactionTime/60);
-    }
-  }
-  void keyPressed(){
-   if (keyCode == '1'){
-      cursorType = 1;
-    }
-    if (keyCode == '2'){
-      cursorType = 2;
-    }
-    if (keyCode == '3'){
-      cursorType = 3;
-    }
-    if (keyCode == TAB){
-      status = 1;
-    }
-    if (keyCode == ENTER){
-      status = 2;
-    }
-    if (keyCode == BACKSPACE){
-      status = 3;
-      result = random(0.5 , 2);
-    }
-  }
 
     </script>
     <canvas id="sketch" style="border: 1px solid black;"></canvas>
